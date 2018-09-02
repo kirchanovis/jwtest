@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <ul class="menu">
+      <li class="nav__item is-active">
+        <router-link class="menu__link" :to="`/read/${user}`">книги</router-link>
+      </li>
+      <li class="nav__item">
+        <router-link class="menu__link" :to="`/read/${user}/plans`">хочет прочитать</router-link>
+      </li>
+      <li class="nav__item">
+        <router-link class="menu__link" :to="`/read/${user}/finished`">прочтитанные книги</router-link>
+      </li>
+    </ul>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  computed:{
+    user() {
+      if (this.$route.params.id) {
+        return Number(this.$route.params.id)
+      } else {
+        return 1
+      }
+    } 
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
